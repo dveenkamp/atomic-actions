@@ -1,0 +1,41 @@
+{
+  "name": "redux-atoms",
+  "version": "0.1.0",
+  "description": "Treat multiple redux updates as one change",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/webpack --mode=production",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dveenkamp/redux-atoms.git"
+  },
+  "keywords": [
+    "redux",
+    "atomic",
+    "atom",
+    "action",
+    "actions",
+    "multiple",
+    "middleware",
+    "bundle",
+    "update"
+  ],
+  "author": "Daniel Veenkamp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dveenkamp/redux-atoms/issues"
+  },
+  "homepage": "https://github.com/dveenkamp/redux-atoms#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-transform-destructuring": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0"
+  }
+}

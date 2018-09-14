@@ -1,2 +1,2 @@
 # redux-atoms
-Treat multiple Redux updates as one
+Treat multiple Redux updates as one change

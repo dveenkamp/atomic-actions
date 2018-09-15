@@ -17,7 +17,7 @@ const middleware = ({ dispatch, getState }) => {
     };
 
     return next => action => {
-        if(!isReduxAtomAction(action) && currentAtomId === NO_CURRENT_ATOM) {
+        if(!isReduxAtomAction(action.type) && currentAtomId === NO_CURRENT_ATOM) {
             //This is not an action we're looking for
             return next(action);
         }

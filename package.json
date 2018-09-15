@@ -1,6 +1,6 @@
 {
   "name": "redux-atoms",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Treat multiple redux updates as one change",
   "main": "dist/index.js",
   "scripts": {

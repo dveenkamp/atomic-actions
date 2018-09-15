@@ -40,8 +40,8 @@ const incrementBy3 = () => atom({
 store.dispatch(incrementBy3()); //Increment gets dispatched 3 times, store only updates once!
 ```
 
+Atomicity is preserved for these actions as well (where the name redux-atoms comes from...), meaning that if another action gets dispatched before `store.dispatch(incrementBy3())` is finished, it will be placed on a queue, and will be re-dispatched once the atomic update is finished...
 
-An interesting point about the update being atomic is that if another action gets dispatched before the atomic transaction is finished, it will be added to a queue and will have to wait for the transaction to be finished.
 ```js
 // Let's say you have a custom middleware that dispatches an action whenever it sees 'INCREMENT' actions
 const incrementMiddleware = store => next => action => {

@@ -41,13 +41,38 @@ store.dispatch(incrementBy3()); //Increment gets dispatched 3 times, store only 
 ```
 
 
+An interesting point about the update being atomic is that if another action gets dispatched before the atomic transaction is finished, it will be added to a queue and will have to wait for the transaction to be finished.
+```js
+// Let's say you have a custom middleware that dispatches an action whenever it sees 'INCREMENT' actions
+const incrementMiddleware = store => next => action => {
+  if(action.type === 'INCREMENT') {
+    dispatch({ type: 'SAW_AN_INCREMENT!' })
+  }
+  return next(action);
+};
+
+//(assume it gets applied to the middleware chain before atomMiddleware)
+
+store.dispatch(incrementBy3());
+
+/**
+Here's what our log will look like:
+
+'INCREMENT'
+'INCREMENT'
+'INCREMENT'
+'SAW_AN_INCREMENT'
+'SAW_AN_INCREMENT'
+'SAW_AN_INCREMENT'
+*/
+```
+
 ## Movitivation
 I've never worked on a redux application that I haven't used redux-thunk in, or some other way to dispatch multiple redux actions together. The problem is that there is no "at once" with redux; any time an action is dispatched, that creates a brand new store (assuming immutability principles are followed). If I have 3 actions I need to dispatch, I make 3 new instances of the state, which could lead to 3 new renders of the application. Not to mention, it's possible for things to go wrong while executing those actions.
 
 Semantically, we want one action that says "SUBMIT_MY_FORM", but because of how reducers are often structured, we dispatch 3 actions that end up submitting the form, without saying so. We lose context in our debugging, as well as our understanding of the application flow.
 
-Instead of going from...
-`stateA -> stateB -> stateC`
+Instead of going from `stateA -> stateB -> stateC`,
 
 let's just go from `stateA -> stateC`!
 

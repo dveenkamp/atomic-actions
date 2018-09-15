@@ -13,6 +13,8 @@ const middleware = ({ dispatch, getState }) => {
     const clearAtomState = () => {
         currentAtomId = NO_CURRENT_ATOM;
         rollingBack = false;
+
+        actionQueue.forEach(dispatch);
         actionQueue = [];
     };
 
